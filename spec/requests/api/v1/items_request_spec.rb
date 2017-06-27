@@ -41,9 +41,12 @@ describe "Items API" do
         description: "One of the best."
       }
 
+      post "api/v1/items", params: {item: item_params}
+      item = Item.last
+
       expect{
-        post "/api/v1/items", params: item_params
-      }.to change { item_params.count }.by(1)
+        post "/api/v1/items", params: item
+      }.to change { item.count }.by(1)
 
       expect(response).to have_http_status(201)
     end
